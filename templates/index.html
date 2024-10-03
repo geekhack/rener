@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Price Prediction</title>
+
+    <style>
+        body {
+          padding: 20px;
+          margin: 10px;
+          background-color: #eff3f2;
+        }
+  
+        #btn {
+          background-color: #040b3c;
+          color: #fff;
+          border: 0;
+          padding: 15px 30px;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+  
+        input[type="text"],
+        input[type="number"], input[type="date"], select {
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          width: 40%;
+        }
+  
+      </style>
+</head>
+<body>
+    <h1>Product Price Prediction</h1>
+    <form action="/predict" method="post">
+        <label for="demand_elasticity">Demand Elasticity:</label>
+        <input type="text" id="demand_elasticity" placeholder="e.g 1.5" name="demand_elasticity" required><br><br>
+
+        <label for="competitor_pricing">Competitor Pricing:</label>
+        <input type="text" id="competitor_pricing" placeholder="e.g 2000" name="competitor_pricing" required><br><br>
+
+        <label for="customer_preferences">Select Preference:</label>
+        <select name="customer_preferences" id="customer_preferences" required>
+            {% for idx, category in categories %}
+                <option value="{{idx}}">{{ category }}</option>
+            {% endfor %}
+    
+        </select><br><br>  
+    
+
+        <label for="age">User Age:</label>
+        <input type="text" id="age" name="age" required><br><br>
+
+
+        <label for="quantity">Quantity:</label>
+        <input type="text" id="quantity" name="quantity" required><br><br>
+
+        <label for="quantity">Pick date:</label>
+        <input type="date" id="date" name="date" required><br><br>
+
+        <input id="btn" type="submit" value="Predict">
+    </form>
+    
+    {% if prediction_text %}
+        <h2>{{ prediction_text }}</h2>
+    {% endif %}
+</body>
+</html>
